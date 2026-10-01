@@ -1,0 +1,38 @@
+# Private references and local authoring material
+素材/
+reference/
+private/
+workbench/
+.hallmark/
+docs/
+prompts/
+audio/
+
+# Internal asset notes and reports
+ART_ASSET_TODO.md
+ASSET_MANIFEST.md
+AUDIT_REPORT.md
+TEST_REPORT.md
+DEPLOYMENT_CHECKLIST.md
+design.md
+
+# Non-runtime asset variants
+assets/backgrounds/
+assets/gallery/
+assets/asset-manifest.json
+assets/character-manifest.json
+assets/music/se_*.wav
+assets/sounds/se_ding.wav
+
+# Keep only the release utilities; the other scripts are authoring/QA tools.
+tools/*
+!tools/build-release.cjs
+!tools/check-release.cjs
+!tools/serve-release.cjs
+
+*.psd
+*.kra
+
+dist/
+node_modules/
+
