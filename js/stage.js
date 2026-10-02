@@ -23,14 +23,32 @@
     }
   });
   const playBgm = (id) => f(async function () {
+    this.storage({ bgmId: id });
     const current = (this.state('music') || []).map((s) => s.statement?.split(' ')[2]).filter(Boolean);
-    if (current.length > 1) await action(this, 'stop music with fade 0.01');
     if (current.length === 1 && current[0] === id) return;
-    // Stop and finish a short fade BEFORE starting the next: never two concurrent BGMs.
-    if (current.length) await action(this, 'stop music with fade 0.16');
-    if (id) await action(this, `play music ${id} loop with fade 0.22`);
+    // The bundled 2.8 parser treats "with" as a media ID without an explicit ID.
+    // Name each track so stopping its player also removes its serialized state.
+    let incoming;
+    if (id && !current.includes(id)) {
+      await action(this, `play music ${id} loop`);
+      incoming = this.mediaPlayer('music', id);
+      incoming.volume = 0;
+      incoming.output.gain.linearRampToValueAtTime(this.preference('Volume').Music, incoming.audioContext.currentTime + .65);
+    }
+    const fades = [...new Set(current)].filter(track => track !== id).map(async track => {
+      const player = this.mediaPlayer('music', track);
+      if (player) player.volume = this.preference('Volume').Music;
+      await action(this, `stop music ${track} with fade 0.75`);
+    });
+    if (incoming) fades.push(new Promise(resolve => setTimeout(resolve, 650)));
+    await Promise.all(fades);
+    if (incoming && this.mediaPlayer('music', id) === incoming) incoming.volume = this.preference('Volume').Music;
   });
   const playSe = (id) => f(async function () {
+    if (['classroom','playground'].includes(id)) {
+      window.JiaoguanAudio?.scene(this.storage('backgroundId') || (id === 'playground' ? 'military' : 'classroom'));
+      return;
+    }
     await action(this, 'stop sound');
     await action(this, `play sound ${id}`);
   });
@@ -42,10 +60,16 @@
   });
   const scene = (id, bgm, chapter) => [
     clearCharacters(),
+    f(async function () {
+      for (const entry of [...(this.state('images') || [])]) {
+        const image = typeof entry === 'string' ? entry.split(' ')[2] : entry.statement?.split(' ')[2];
+        if (image) await action(this, `hide image ${image}`);
+      }
+    }),
     f(function () {
-      this.storage({ backgroundId: id, chapter });
+      this.storage({ backgroundId: id, chapter, bgmId: bgm });
+      window.JiaoguanAudio?.scene(id);
       window.JiaoguanUI?.setChapter(chapter);
-      this.autoPlay(false); this.skip(false);
     }),
     'stop sound', changeBackground(id), playBgm(bgm)
   ];
@@ -76,19 +100,19 @@
   });
   const finish = () => f(async function () {
     this.autoPlay(false); this.skip(false);
-    await this.Storage.set('completion', { date: new Date().toISOString(), version: '3.0.0' });
-    // A first finish unlocks the complete five-piece gallery, independently of saves.
-    for (const id of ['cg_01','cg_02','cg_03','cg_04','cg_05']) {
-      const gallery = await this.Storage.get('gallery').catch(() => ({ unlocked: [] }));
-      if (!(gallery.unlocked || []).includes(id)) await action(this, 'gallery unlock ' + id);
-    }
+    window.Jiaoguan?.playback.stop();
+    const data = this.storage();
+    const label = this.state('label');
+    const events = { ...(data.events || {}), [label]: { chapter: data.chapter, timestamp: new Date().toISOString() } };
+    this.storage({ events });
+    await this.Storage.set('completion', { date: new Date().toISOString(), version: '4.2.0', bond: data.bond, flags: data.flags, events, choices: data.choices || [] });
     await this.Storage.remove('JiaoguanAuto_1');
   });
   const reset = () => f(function () {
     this.autoPlay(false); this.skip(false);
-    this.storage({ schema: 3, bond: 0, flags: {}, chapter: '九月 · 军训', backgroundId: 'military', act7_open: '', act7_tail: '' });
+    this.storage({ schema: 4, version: '4.2.0', bond: 0, flags: {}, chapter: '九月 · 军训', backgroundId: 'military', bgmId: 'military', act7_open: '', act7_tail: '' });
   });
-  monogatari.storage({ schema: 3, bond: 0, flags: {}, chapter: '九月 · 军训', backgroundId: 'military', act7_open: '', act7_tail: '' });
+  monogatari.storage({ schema: 4, version: '4.2.0', bond: 0, flags: {}, chapter: '九月 · 军训', backgroundId: 'military', bgmId: 'military', act7_open: '', act7_tail: '' });
   window.JiaoguanStage = { f, action, scene, clearCharacters, showCharacter, hideCharacter, moveCharacter, approachDesk, changeExpression, changeBackground, playBgm, playSe, showCG, hideCG, shakeScreen, fadeScreen, wait, bond, branchText, pausePlayback, finish, reset };
 })();
 

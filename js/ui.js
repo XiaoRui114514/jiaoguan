@@ -2,10 +2,15 @@
 (function () {
   const engine = monogatari, store = JiaoguanStorage;
   const esc = (text) => String(text ?? '').replace(/[&<>"']/g, (char) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
-  let panel, content, title, view = '', previousFocus, galleryIndex = 0, toastTimer;
+  let panel, content, title, view = '', previousFocus, galleryIndex = 0, toastTimer, autoToastTimer, rendering = 0, loading = false;
   let presentation = store.read('presentation') || { size: 'normal', motion: true };
-  const titles = { menu: '暂停', save: '保存游戏', load: '读取存档', settings: '设置', gallery: 'CG 鉴赏', confirm: '返回标题' };
-  const routeNames = { Start:'军训第一天', Act1:'示范', Act2:'调整军姿', Act3:'回教室休息', Act4:'军训第五天 · 休息', Act5:'开学第一周', Act5Talk:'午休历史', Act6:'开学日常', Act7:'今天不过去', Act8:'晚自习后' };
+  const titles = { menu: '暂停', save: '保存游戏', load: '读取存档', settings: '设置', about: '关于', gallery: 'CG 鉴赏', confirm: '返回标题' };
+  function routeNames() {
+    return Object.fromEntries(Object.entries(engine.script()).filter(([, lines]) => Array.isArray(lines)).map(([id, lines]) => {
+      const act = lines.find((line) => typeof line === 'string' && /^centered ACT\s/.test(line));
+      return [id, act ? act.replace(/^centered\s+/, '') : id === 'Start' ? '军训第一天' : id];
+    }));
+  }
   const formatDate = (date) => { try { return new Intl.DateTimeFormat('zh-CN',{ month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' }).format(new Date(date)); } catch (_) { return '时间未知'; } };
   const button = (text, action, attrs = '') => `<button type="button" data-ui-action="${action}" ${attrs}>${text}</button>`;
   function toast(text) {
@@ -13,18 +18,31 @@
     el.textContent = text; el.classList.add('visible');
     clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('visible'), 2400);
   }
+  function automaticToast(persistent) {
+    const el = document.getElementById('jg-auto-status');
+    if (!el || document.hidden) return;
+    el.textContent = persistent ? '自动存档' : '临时自动记录'; el.classList.add('visible');
+    clearTimeout(autoToastTimer); autoToastTimer = setTimeout(() => el.classList.remove('visible'), 1000);
+  }
   function applyPresentation() {
     document.documentElement.dataset.textSize = presentation.size;
     document.documentElement.dataset.reducedMotion = String(!presentation.motion || matchMedia('(prefers-reduced-motion: reduce)').matches);
   }
   async function refreshTitle() {
-    const hasSave = (await store.saves()).length > 0;
+    const saves = await store.saves(), hasSave = saves.length > 0;
     const continueButton = document.querySelector('main-menu [data-action="jg-continue"]');
     if (continueButton) { continueButton.disabled = !hasSave; continueButton.title = hasSave ? '继续最近的记录' : '还没有可读取的记录'; }
+    const latest = document.getElementById('jg-continue-location'), automatic = store.read('JiaoguanAuto_1');
+    if (latest) {
+      latest.hidden = !store.validSave(automatic);
+      latest.textContent = store.validSave(automatic) ? '自动存档 · ' + (automatic.meta?.chapter || automatic.sceneId) : '';
+    }
     const note = document.getElementById('jg-title-note');
-    if (note) note.textContent = store.read('completion') ? '已通关 · CG 鉴赏已全部解锁' : '校园视觉小说 · DEMO 3.0';
+    if (note) note.textContent = store.read('completion') ? '已通关 · 校园视觉小说 4.2.0' : '校园视觉小说 · 4.2.0';
   }
   function setChapter(chapter) {
+    const game = document.querySelector('game-screen');
+    if (game) game.dataset.background = engine.storage('backgroundId') || '';
     const el = document.getElementById('jg-chapter');
     if (el && el.textContent !== chapter) el.textContent = chapter;
   }
@@ -49,35 +67,40 @@
       }
     }
   }
-  async function saveTo(slot, automatic = false) {
+  async function saveTo(slot, automatic = false, prepared = null) {
     if (!engine.global('playing')) return false;
-    const label = automatic ? 'AutoSaveLabel' : 'SaveLabel';
     const key = (automatic ? 'JiaoguanAuto_' : 'JiaoguanSave_') + slot;
     try {
-      await engine.saveTo(label, slot, automatic ? '自动记录' : `记录 ${String(slot).padStart(2,'0')}`);
-      const data = await store.adapter.get(key);
-      data.meta = {
-        version: '3.0.0', chapter: engine.storage('chapter'), background: engine.storage('backgroundId'),
-        text: document.querySelector('[data-ui="say"]')?.getAttribute('string') || document.querySelector('[data-ui="say"]')?.textContent || ''
-      };
+      const data = prepared || Jiaoguan.captureSave();
+      data.name = automatic ? '自动记录' : `记录 ${String(slot).padStart(2,'0')}`;
+      data.date = data.timestamp; data.image = data.background;
+      if (!store.validSave(data)) return false;
       await store.adapter.set(key, data);
       refreshTitle();
-      if (!automatic) toast(store.persistent ? '记录已保存' : '仅保存在本次页面内：浏览器不允许写入本地存档');
+      if (automatic) automaticToast(store.persistent);
+      else toast(store.persistent ? '记录已保存' : '仅保存在本次页面内：浏览器不允许写入本地存档');
       return true;
     } catch (error) { if (!automatic) toast('保存未成功，请重试。'); console.warn('Jiaoguan save failed:', error); return false; }
   }
   async function load(key) {
     Jiaoguan.playback.stop();
+    if (loading || Jiaoguan.advancing) return false;
     const data = store.read(key);
     if (!store.validSave(data)) { toast('这份记录已损坏或版本不兼容，没有修改当前进度。'); return false; }
     if (engine.global('_engine_block')) { toast('正在切换场景，请稍候再读取。'); return false; }
+    loading = true;
     try {
       document.querySelectorAll('choice-container').forEach((el) => el.remove());
       const choice = engine.action('Choice'); if (choice) choice.blocking = false;
+      const gallery = store.read('gallery')?.unlocked || [];
+      await store.adapter.set('gallery', { unlocked: [...new Set([...gallery, ...(data.unlockedCG || [])])].filter((id) => JiaoguanGallery.some((cg) => cg.id === id)) });
       await engine.loadFromSlot(key);
+      // Older 4.0 saves remain readable; the journal starts empty if absent.
+      Object.assign(engine.storage(), { version: store.version }, store.journal(data.game.storage));
       await engine.run(engine.label()[engine.state('step')]);
       close(true); refreshRuntime(); return true;
     } catch (error) { console.warn('Jiaoguan load failed:', error); toast('读取未成功，记录仍保留。'); return false; }
+    finally { loading = false; }
   }
   async function continueGame() {
     const saves = await store.saves();
@@ -90,17 +113,17 @@
     for (let slot = 1; slot <= 6; slot++) {
       const key = 'JiaoguanSave_' + slot, data = values[key], valid = store.validSave(data);
       const scene = engine.assets('scenes')[data?.meta?.background || data?.image];
-      const image = valid && scene ? `<img src="assets/scenes/${esc(scene)}" alt="" loading="lazy" decoding="async">` : '<div class="save-empty"><span>—</span></div>';
+      const image = valid && scene ? `<img src="assets/backgrounds/${esc(scene)}" alt="" loading="lazy" decoding="async">` : '<div class="save-empty"><span>—</span></div>';
       const attrs = reading ? `data-key="${key}" ${!valid ? 'disabled' : ''}` : `data-slot="${slot}"`;
       cards.push(`<article class="save-card ${valid ? 'occupied' : 'empty'}">
         <button type="button" data-ui-action="${reading ? 'load-slot' : 'save-slot'}" ${attrs}>${image}
-          <div class="save-card-copy"><span class="save-number">${String(slot).padStart(2,'0')}</span><strong>${valid ? esc(data.meta?.chapter || routeNames[data.game.state.label] || '剧情记录') : (data ? '记录损坏 / 版本不兼容' : '空白记录')}</strong>
-          <small>${valid ? esc(formatDate(data.date)) : (reading ? '尚未保存' : '点击保存至此处')}</small><p>${valid ? esc(data.meta?.text || '') : ' '}</p></div>
-        </button>${valid ? button('删除','delete-save',`data-key="${key}" class="slot-delete" aria-label="删除记录 ${slot}"`) : ''}</article>`);
+          <div class="save-card-copy"><span class="save-number">${String(slot).padStart(2,'0')}</span><strong>${valid ? esc(data.meta?.chapter || routeNames()[data.game.state.label] || '剧情记录') : (Object.hasOwn(values, key) ? '记录损坏 / 版本不兼容' : '空白记录')}</strong>
+          <small>${valid ? esc(formatDate(data.date)) + ' · v' + esc(data.version) : (reading ? '尚未保存' : '点击保存至此处')}</small><p>${valid ? esc(data.meta?.text || '') : ' '}</p></div>
+        </button>${Object.hasOwn(values, key) ? button('<span class="fas fa-trash-alt" aria-hidden="true"></span>','delete-save',`data-key="${key}" class="slot-delete" aria-label="删除记录 ${slot}" title="删除记录 ${slot}"`) : ''}</article>`);
     }
     const automatic = values.JiaoguanAuto_1;
-    const auto = reading && store.validSave(automatic) ? `<div class="auto-save-row"><div><small>自动记录</small><strong>${esc(automatic.meta?.chapter || '最近进度')}</strong><span>${esc(formatDate(automatic.date))}</span></div>${button('继续这份记录','load-slot','data-key="JiaoguanAuto_1"')}</div>` : '';
-    return `${auto}<div class="save-grid">${cards.join('')}</div>${store.legacyCount ? '<p class="panel-footnote">旧版记录已保留，与 3.0 独立。</p>' : ''}`;
+    const auto = store.validSave(automatic) ? `<div class="auto-save-row"><div><small>自动存档</small><strong>${esc(automatic.meta?.chapter || '最近进度')}</strong><span>${esc(formatDate(automatic.date))} · v${esc(automatic.version)}</span></div>${reading ? button('继续这份记录','load-slot','data-key="JiaoguanAuto_1"') : '<span>独立记录</span>'}</div>` : '';
+    return `${auto}<div class="save-grid">${cards.join('')}</div>${store.legacyCount ? '<p class="panel-footnote">3.0 及更早的存档仍保留在浏览器中。4.0 剧情已扩写，旧行号无法准确对应，请从新游戏开始；原阅读设置与已解锁的旧 CG 已迁移。</p>' : ''}`;
   }
   function settingsMarkup() {
     const volume = engine.preference('Volume');
@@ -117,12 +140,24 @@
   }
   async function galleryMarkup() {
     const unlocked = store.read('gallery')?.unlocked || [];
-    return `<p class="panel-intro">${unlocked.length} / 5 已解锁</p><div class="gallery-grid">${JiaoguanGallery.map((cg, i) => {
+    return `<p class="panel-intro">${JiaoguanGallery.filter((cg) => unlocked.includes(cg.id)).length} / ${JiaoguanGallery.length} 已解锁</p><div class="gallery-grid">${JiaoguanGallery.map((cg, i) => {
       const available = unlocked.includes(cg.id);
       return `<button type="button" class="gallery-card ${available ? '' : 'locked'}" data-ui-action="gallery-image" data-index="${i}" ${available ? '' : 'disabled'}>
         <div class="gallery-picture">${available ? `<img src="assets/thumbnails/${cg.thumb}" alt="${esc(cg.title)}" loading="lazy" decoding="async">` : '<span aria-label="尚未解锁">未解锁</span>'}</div>
         <div class="gallery-caption"><small>${String(i + 1).padStart(2,'0')}</small><strong>${esc(cg.title)}</strong><span>${available ? esc(cg.detail) : '在剧情中遇见这一刻'}</span></div></button>`;
     }).join('')}</div>`;
+  }
+  function aboutMarkup() {
+    return `<div class="about-copy"><h3>教官<span>v${esc(store.version)}</span></h3>
+      <p>一部以九月校园为背景的视觉小说。从军训、午休到晚自习，在普通的对话和选择里，慢慢认识廖思宇与身边的同学。</p>
+      <dl><div><dt>游戏引擎</dt><dd><a href="https://monogatari.io/" target="_blank" rel="noopener noreferrer">Monogatari 2.8.0</a></dd></div>
+        <div><dt>开发制作</dt><dd>Codex + GPT-6.1 Sol 辅助制作</dd></div></dl>
+      <a class="about-repository" href="https://github.com/XiaoRui114514/jiaoguan" target="_blank" rel="noopener noreferrer"><span class="fab fa-github" aria-hidden="true"></span>GitHub · XiaoRui114514 / jiaoguan<span class="fas fa-external-link-alt" aria-hidden="true"></span></a>
+      <details class="about-credits"><summary>音乐与音效署名</summary>
+        <p>配乐：Cynic Music / The Cynic Project、Écrivain、Matthew Pablo、Yoiyami。环境与音效：Kenney、Spring Spring、dklon、leonelmail、Fupi。</p>
+        <p>Snowland Town © Matthew Pablo；Crickets © dklon，采用 <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>。其余音频采用 CC0。音频经过音量调整、循环处理与格式转换；铃声经重新编排。</p>
+        <a href="assets/audio/CREDITS.md" target="_blank" rel="noopener noreferrer">完整来源与许可</a>
+      </details></div>`;
   }
   function menuMarkup() {
     return `<p class="pause-chapter">${esc(engine.storage('chapter') || '九月')}</p><nav class="pause-menu" aria-label="游戏菜单">
@@ -131,6 +166,7 @@
       </nav>`;
   }
   async function open(next) {
+    const ticket = ++rendering;
     Jiaoguan.playback.stop();
     if (!panel.open) previousFocus = document.activeElement;
     view = next; panel.dataset.view = next; title.textContent = titles[next] || 'CG 鉴赏';
@@ -138,15 +174,17 @@
     if (next === 'menu') html = menuMarkup();
     else if (next === 'save' || next === 'load') html = await saveMarkup(next === 'load');
     else if (next === 'settings') html = settingsMarkup();
+    else if (next === 'about') html = aboutMarkup();
     else if (next === 'gallery') html = await galleryMarkup();
     else if (next === 'confirm') html = `<div class="confirm-copy"><p>返回标题吗？当前进度已经自动记录，手动存档不会被覆盖。</p>${button('返回标题','confirm-title')}${button('留在这里','resume')}</div>`;
+    if (ticket !== rendering) return;
     content.innerHTML = html;
     if (!panel.open) panel.showModal();
     panel.querySelector('[data-ui-action="close"]').focus({ preventScroll: true });
   }
   function close(force = false) {
     if (view === 'gallery-view' && !force) { open('gallery'); return; }
-    view = ''; panel.close(); previousFocus?.focus?.({ preventScroll: true });
+    rendering++; view = ''; panel.close(); previousFocus?.focus?.({ preventScroll: true });
   }
   function showGallery(index) {
     const cg = JiaoguanGallery[index];
@@ -169,7 +207,7 @@
     if (action === 'auto' || action === 'skip') { close(true); Jiaoguan.playback.set(action); return; }
     if (action === 'title') return open('confirm');
     if (action === 'confirm-title') {
-      await saveTo(1,true); close(true); document.querySelectorAll('choice-container').forEach((node) => node.remove());
+      Jiaoguan.saveAutomatic('title'); close(true); document.querySelectorAll('choice-container').forEach((node) => node.remove());
       await engine.run('end'); refreshTitle(); return;
     }
     if (action === 'save-slot') {
@@ -182,7 +220,7 @@
     }
     if (action === 'load-slot') { el.disabled = true; await load(el.dataset.key); if (el.isConnected) el.disabled = false; return; }
     if (action === 'delete-save') {
-      if (!el.dataset.confirmDelete) { el.dataset.confirmDelete = '1'; el.textContent = '确认删除'; return; }
+      if (!el.dataset.confirmDelete) { el.dataset.confirmDelete = '1'; el.innerHTML = '<span class="fas fa-check" aria-hidden="true"></span>'; el.setAttribute('aria-label', '再次点击确认删除'); el.title = '再次点击确认删除'; return; }
       await store.adapter.remove(el.dataset.key); await open(view); refreshTitle(); return;
     }
     if (action === 'gallery-image') return showGallery(Number(el.dataset.index));
@@ -201,13 +239,13 @@
   function installDebug() {
     if (new URLSearchParams(location.search).get('debug') !== '1') return;
     const el = document.createElement('aside'); el.id = 'jg-debug';
-    el.innerHTML = `<details><summary>DEBUG · 开发信息</summary><dl>${['scene','line','bond','flags','bgm','characters','playback','timers'].map((name) => `<div><dt>${esc(({scene:'Scene',line:'Line',bond:'Bond',flags:'Flags',bgm:'Current BGM',characters:'Characters',playback:'Playback',timers:'Timers'})[name])}</dt><dd data-debug="${name}">—</dd></div>`).join('')}</dl><label>Bond <input id="jg-debug-bond" type="number" min="0" max="20" value="0"></label><select id="jg-debug-scene" aria-label="跳转场景">${Object.entries(routeNames).map(([id,name])=>`<option value="${id}">${id} · ${name}</option>`).join('')}</select><div>${button('跳转','debug-jump')}${button('解锁 CG','debug-gallery')}${button('清除本游戏记录','debug-clear')}</div></details>`;
+    el.innerHTML = `<details><summary>DEBUG · 开发信息</summary><dl>${['scene','line','bond','flags','bgm','characters','background','autoSave','unlockedCG','playback','timers'].map((name) => `<div><dt>${esc(({scene:'Scene',line:'Line',bond:'Bond',flags:'Flags',bgm:'Current BGM',characters:'Characters',background:'Background',autoSave:'Auto Save',unlockedCG:'CG unlock',playback:'Playback',timers:'Timers'})[name])}</dt><dd data-debug="${name}">—</dd></div>`).join('')}</dl><label>Bond <input id="jg-debug-bond" type="number" min="0" max="99" value="0"></label><select id="jg-debug-scene" aria-label="跳转场景">${Object.entries(routeNames()).map(([id,name])=>`<option value="${esc(id)}">${esc(name === id ? id : id + ' · ' + name)}</option>`).join('')}</select><div>${button('跳转','debug-jump')}${button('解锁 CG','debug-gallery')}${button('清除本游戏记录','debug-clear')}</div></details>`;
     document.body.appendChild(el);
-    el.querySelector('input').addEventListener('change', (event) => { engine.storage({ bond: Math.max(0,Math.min(20,Number(event.target.value) || 0)) }); refreshRuntime(); });
+    el.querySelector('input').addEventListener('change', (event) => { engine.storage({ bond: Math.max(0,Math.min(99,Number(event.target.value) || 0)) }); refreshRuntime(); });
     el.addEventListener('click', async (event) => {
       const action = event.target.closest('[data-ui-action]')?.dataset.uiAction; if (!action) return;
       if (action === 'debug-jump') { Jiaoguan.playback.stop(); if (!engine.global('playing')) await engine.runListener('start'); await engine.run('jump ' + el.querySelector('select').value); }
-      if (action === 'debug-gallery') { for (const cg of JiaoguanGallery) await JiaoguanStage.action(engine,'gallery unlock ' + cg.id); toast('5 张 CG 已解锁'); }
+      if (action === 'debug-gallery') { for (const cg of JiaoguanGallery) await JiaoguanStage.action(engine,'gallery unlock ' + cg.id); toast(JiaoguanGallery.length + ' 张 CG 已解锁'); }
       if (action === 'debug-clear') { if (confirm('只清除《教官》新版的存档、设置与鉴赏记录？')) { store.resetAll(); location.reload(); } }
       refreshRuntime();
     });
@@ -215,11 +253,12 @@
   function init() {
     applyPresentation();
     const main = document.querySelector('main-screen');
-    main.insertAdjacentHTML('afterbegin','<div class="title-lockup"><p class="title-season">九月 / 上海</p><h1>教官<span class="title-dot">。</span></h1><p class="title-tagline">一开始，我只是觉得这个人很好玩。</p></div><img class="title-character" src="assets/characters/liaosiyu/wearing_backpack.webp" alt="廖思宇" decoding="async"><div class="title-colophon"><span id="jg-title-note">校园视觉小说 · DEMO 3.0</span><span>JI A O G U A N</span></div>');
+    main.insertAdjacentHTML('afterbegin','<div class="title-lockup"><p class="title-season">九月 / 上海</p><h1>教官<span class="title-dot">。</span></h1><p class="title-tagline">一开始，我只是觉得这个人很好玩。</p></div><img class="title-character" src="assets/characters/liaosiyu/wearing_backpack.webp" alt="廖思宇" decoding="async"><div class="title-colophon"><span id="jg-title-note">校园视觉小说 · 4.2.0</span><span>JIAOGUAN</span></div>');
+    main.insertAdjacentHTML('beforeend','<small id="jg-continue-location" hidden></small>');
     const game = document.querySelector('game-screen');
     game.insertAdjacentHTML('afterbegin','<div class="game-topline"><span id="jg-chapter">九月 · 军训</span><span class="topline-title">教官</span></div><button id="jg-next" type="button" data-action="jg-next" aria-label="下一句" title="下一句"><span class="fas fa-arrow-right" aria-hidden="true"></span></button>');
     engine.registerListener('jg-next',{callback:()=>Jiaoguan.advance()});
-    document.getElementById('jg-shell').insertAdjacentHTML('beforeend','<dialog id="jg-panel" aria-labelledby="jg-panel-title"><header class="panel-header"><div><small>教官 / JIAOGUAN</small><h2 id="jg-panel-title"></h2></div><button type="button" data-ui-action="close" aria-label="返回游戏" title="返回游戏"><span class="fas fa-times" aria-hidden="true"></span></button></header><div id="jg-panel-content"></div></dialog><div id="jg-toast" role="status" aria-live="polite"></div>');
+    document.getElementById('jg-shell').insertAdjacentHTML('beforeend','<dialog id="jg-panel" aria-labelledby="jg-panel-title"><header class="panel-header"><div><small>教官 / JIAOGUAN</small><h2 id="jg-panel-title"></h2></div><button type="button" data-ui-action="close" aria-label="返回游戏" title="返回游戏"><span class="fas fa-times" aria-hidden="true"></span></button></header><div id="jg-panel-content"></div></dialog><div id="jg-toast" role="status" aria-live="polite"></div><div id="jg-auto-status" role="status" aria-live="polite"></div>');
     panel=document.getElementById('jg-panel');content=document.getElementById('jg-panel-content');title=document.getElementById('jg-panel-title');
     panel.addEventListener('click',clickAction);
     panel.addEventListener('cancel',(event)=>{event.preventDefault();close();});
@@ -229,14 +268,21 @@
       const value=Number(el.value);const output=el.closest('label').querySelector('output');
       if (['Music','Sound'].includes(key)) {
         const volume={...engine.preference('Volume'),[key]:value};engine.preferences({Volume:volume},true);
-        for (const player of engine.mediaPlayers(key.toLowerCase())) player.volume=value;
+        for (const player of engine.mediaPlayers(key.toLowerCase())) {
+          player.output?.gain.cancelScheduledValues(player.audioContext.currentTime);
+          player.volume=value;
+        }
         output.textContent=Math.round(value*100)+'%';
       } else {engine.preference(key,value);output.textContent=value+(key==='TextSpeed'?' ms':' 秒');}
     });
     installDebug(); refreshTitle(); refreshRuntime();
     if (!store.persistent) toast('浏览器禁止本地存档，本次可继续游玩，但刷新后记录可能消失。');
+    else if (store.migrated && !store.read('migrationNotified')) {
+      store.write('migrationNotified', true);
+      toast('已沿用 3.0 的阅读设置和已解锁 CG；旧存档保留，详情见读档页。');
+    }
   }
-  window.JiaoguanUI={init,open,close,saveTo,load,continueGame,refreshRuntime,refreshTitle,setChapter,updatePlayback,galleryStep,toast,get isOpen(){return Boolean(panel?.open);},get view(){return view;}};
+  window.JiaoguanUI={init,open,close,saveTo,load,continueGame,refreshRuntime,refreshTitle,setChapter,updatePlayback,galleryStep,toast,get isLoading(){return loading;},get isOpen(){return Boolean(panel?.open);},get view(){return view;}};
 })();
 
 

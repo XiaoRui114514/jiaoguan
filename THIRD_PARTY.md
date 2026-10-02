@@ -9,3 +9,20 @@ Source maps, debug library, sample story, packaging tools and sample assets are 
 
 The engine is bundled with its upstream libraries; this is not a claim that
 its source package has zero dependencies. No runtime CDN is required.
+
+## 4.0 assets
+
+New character illustrations, backgrounds and event CGs were generated for this
+project with `gpt-image-2.5-sunburst`, then reviewed and exported to WebP. Existing
+approved project illustrations were retained where suitable. No third-party
+game characters, CGs, UI artwork or screenshots were copied.
+
+## 4.2 audio
+
+The former procedural audio was replaced with six instrumental recordings,
+three recorded ambience loops, three scene effects and two interface sounds.
+Sources are CC0 or CC BY 3.0. The complete recording titles, author credits,
+source links, licenses and processing changes are in
+[assets/audio/CREDITS.md](assets/audio/CREDITS.md), which is also included in
+the static release and accessible from About. The two CC BY recordings are
+Snowland Town by Matthew Pablo and Crickets by dklon.

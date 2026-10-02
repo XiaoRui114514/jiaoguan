@@ -6,7 +6,7 @@ workbench/
 .hallmark/
 docs/
 prompts/
-audio/
+/audio/
 
 # Internal asset notes and reports
 ART_ASSET_TODO.md
@@ -17,7 +17,6 @@ DEPLOYMENT_CHECKLIST.md
 design.md
 
 # Non-runtime asset variants
-assets/backgrounds/
 assets/gallery/
 assets/asset-manifest.json
 assets/character-manifest.json
@@ -29,6 +28,15 @@ tools/*
 !tools/build-release.cjs
 !tools/check-release.cjs
 !tools/serve-release.cjs
+!tools/generate_art_v4.ps1
+!tools/generate_art_v5.ps1
+!tools/generate_events_v4.ps1
+!tools/prepare_events_v4.py
+!tools/prepare_art_v4.py
+!tools/make_audio_v4.py
+!tools/story-metrics.cjs
+!tools/generate_rui_v6.ps1
+!tools/prepare_rui_v6.py
 
 *.psd
 *.kra

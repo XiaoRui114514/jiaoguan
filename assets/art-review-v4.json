@@ -1,0 +1,997 @@
+{
+  "version": "4.1.0",
+  "date": "2026-10-02",
+  "method": "Visual review of final generated character, background and event CG contact sheets, followed by an independent source-photo hash comparison.",
+  "files": [
+    {
+      "path": "assets/characters/dazhang/asking_question.webp",
+      "sha256": "6d5a6fc68892d53a7b85e99e1497e74c16202074ee973bd5357cf4a41a6b21d9",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/dazhang/laughing.webp",
+      "sha256": "d5e4d88920adfdaee059c01b008414d3d0a345090ab65e43076b310c536f53fb",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/dazhang/military_asking_question.webp",
+      "sha256": "c71abf46ea39daabeb4f00c85a05ac4ecd049707a5e4a5a3056a8bd8842679fb",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/dazhang/military_laughing.webp",
+      "sha256": "a95e89d5188e32cd198ba0c06a4def22e55e7f43ade07ee9d29bcb7a1f0b5fdc",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/dazhang/military_shocked.webp",
+      "sha256": "dfb7be1418152193937dbfb5437ff9d04b92d586430af8f78f2c300d15af7f23",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/dazhang/military_smug.webp",
+      "sha256": "d21628d2042a06390dfaedf77b09d8d81f03a4b1a633ff05b93a0e7d80f4b1bf",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/dazhang/normal.webp",
+      "sha256": "56087c8f45aa7fba416dc959d572f1041bf0dd6803b493d65ddbf5977df692cd",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/dazhang/seriously_talking_nonsense.webp",
+      "sha256": "713d6592158b03750d9362093cfb46af71e67d02c3f8dd46109f3040b7ad2111",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/dazhang/shocked.webp",
+      "sha256": "2880ac6ac545bb56e90bd8b1cae514116d73017990e79d05232afd4c544be925",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/dazhang/smug.webp",
+      "sha256": "2f8f3a8cbc38e15cd3fe2df61deb27883db336cd191cd70695d70fd4e985222b",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/calm_100_percent.webp",
+      "sha256": "e4a163646be04f336e2319810cee6a9f1b9ef964fdc1b0b11fa4d21b3cd3c7e8",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/covering_mouth_pupu.webp",
+      "sha256": "d6a91fa0bd62348036a688e49816a1b126ff80781ecf542401f1123f69450127",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/eating.webp",
+      "sha256": "02a7748db11bf2ba5280813099644f66da537eac827250828c102165dde9f926",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/holding_book.webp",
+      "sha256": "121ff62c4b506a3d850d52d6c285fdeb86907f291b9b8f3b8c0c11632c4ea753",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/military_attention.webp",
+      "sha256": "0354a460556e08329bb947f539d8749a62557a2f1f95a4efc3ff10ddabd5d662",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/military_command_response.webp",
+      "sha256": "986dfba15844e27e1e572060bd0526b527a428addbca09584dab9b9ff466aa72",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/military_covering_mouth_pupu.webp",
+      "sha256": "b92312d7faca9f28bf9226bdaf910948564b3baaab7d9e33f8e0c4855c100c18",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/military_rest.webp",
+      "sha256": "91f807e9399332e34df542ed989e27f301d2ce965a0db7325a5fb27477d9f304",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/normal_standing.webp",
+      "sha256": "7de63aeed7021147a770e8d8956787a8da85680483cfe799b9173a828f33439c",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/packing_bag.webp",
+      "sha256": "15e0baa8f59070441a45a0cd38f0177ac44eb1be9540582ec29e67831afed698",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/pe_normal.webp",
+      "sha256": "6bf786c7ee0ece36a698efeb93cd7eb71db6fd7973b9debae1ff1d0f37c30f01",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/reading.webp",
+      "sha256": "64158427a03189c03dbc822dbf0e4aa881c7837c60772c46ec086b791d58a6f9",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/shy.webp",
+      "sha256": "face0f072b7a17e970a5afdccc532b2b6c97d51652fd44f1747883985ed3a3ee",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/thinking.webp",
+      "sha256": "5fe2eed1bdac59053f20db70c52ee703cae4897f9e6688f5b03aba85bc9e510d",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/walking.webp",
+      "sha256": "69567abc468833ada506d013655b3a9c5bb80d1bcdc35a0b22158debd3bba3f8",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/wearing_backpack.webp",
+      "sha256": "80ca5da5ae0ee23593cffd2d1dba75e2bfc9ba6944786f00c0b115662859b71f",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/liaosiyu/writing.webp",
+      "sha256": "7cfcef75051db8ee4b07582b41a9473b597989696fbf5774aa2ce8b1d02c10ce",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/meili_xiaoxu/eating.webp",
+      "sha256": "5e5f997cbbb6394b397db904727bb0a4d4b9807db42567457feb58e04fc8560d",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/meili_xiaoxu/military_attention.webp",
+      "sha256": "3cf13c48b08f131434c4cf2be872755085e262c59670338a7dd5af05c59b2c9c",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/meili_xiaoxu/military_rest.webp",
+      "sha256": "29428955a8a28bdb2d5385687582561dd04f4b6660f0af979e0b8c2e9ef1a644",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/meili_xiaoxu/normal.webp",
+      "sha256": "836b0214569316992813f6a293fc069b4d113022533671320739b4e2f87eb556",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/meili_xiaoxu/reading.webp",
+      "sha256": "54868a3ee3652db8f79c79f739ca1919ee57095ff189ceebc864642a09e4a834",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/meili_xiaoxu/thinking.webp",
+      "sha256": "a24ae9d7e84bf893ea0b396e75e8ef38144d97ac67d435baca392a1a8f393249",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/meili_xiaoxu/wearing_backpack.webp",
+      "sha256": "af64d26b0a46791bacc95772a7d4c756a1805abca0626c4e55b358e1aa449c61",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/meili_xiaoxu/writing.webp",
+      "sha256": "a1822a24927aa2acfc4aee9db54369e48d4458c55e59c90927be475862c8275b",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/military_instructor/calling_student.webp",
+      "sha256": "04ff9edfa9d06dd8316784daa671a92c4eed5e2e0c7b84979547556672fc6399",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/military_instructor/demonstrating.webp",
+      "sha256": "c90bd810caa194173dc3e300e5ffe8f915f47738851471d0e62991fd6f661f05",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/military_instructor/looking_at_liaosiyu.webp",
+      "sha256": "597551e8f51314755fa526fe92b147ea4759867586fc327acb71d6748e92bba6",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/military_instructor/military_instruction.webp",
+      "sha256": "336fe34881c13b656380d87f65ca653904f331147014a745b198f32832e5c14c",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/military_instructor/normal.webp",
+      "sha256": "8f51c9d18e7664bfc98abd42f80711298b75be204c20d231476548fab78b0a48",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/military_instructor/serious.webp",
+      "sha256": "b81525c318161fdfe0f2afeaee7d4ddeb70d5c1e74cb9d26bda287e0feb6f5fc",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/military_instructor/slightly_confused.webp",
+      "sha256": "a491f578c4fd7e863ebc94598f50d8ebc2985190642f360b4578559e1d5002d2",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaochen/bending_forward.webp",
+      "sha256": "9da8995116d1116974e407396f7ec181eee98b981a1d291f76dc4abdaee54726",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaochen/laughing.webp",
+      "sha256": "5b4664962ff2ae14b4c81ca778859464f1ad5c8798f8151263dbdbfae0057950",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaochen/military_bending_forward.webp",
+      "sha256": "9eddc751498ad4d2908c440716ffcafe9323478a3d191cc8663d60c8d592de0e",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaochen/military_normal.webp",
+      "sha256": "15025ec28278f64dc313399307e7ff8b37be15ef3246a737126278e8044772ff",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaochen/military_raising_hands.webp",
+      "sha256": "06cc7728cf70935bed555bfd419ff0523987a586d30aa29035a3b3f7d4bf6b3b",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaochen/military_walking_away.webp",
+      "sha256": "040898720e9675a67be7e3e76de9bf4ee503d1e6765a3b1e1d46fb60cd097991",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaochen/normal.webp",
+      "sha256": "caed716404c1d85c3ba01afafe0a8dd207a8af8605529d482170b3692e4fe0ad",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaochen/raising_hands.webp",
+      "sha256": "b3b78d4bd0955baab48f15afa00153f63240b8d811df4174b2e26ec1f342c86c",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaochen/walking_away.webp",
+      "sha256": "f1651a5ccd5461a2cdaaa0ec543173d076c2e90c2c26a67b2dc14bd1afdd35b8",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaohua/eating.webp",
+      "sha256": "f2ec3d019acab501fca00065db9eee5a1e048e3c6bbd28d5aed3de57f03d89ff",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaohua/military_attention.webp",
+      "sha256": "4c32fc537022f41b7c92b344570a719dc355194b4c7067bba46f2ae943086581",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaohua/military_rest.webp",
+      "sha256": "631a563897cebc12aeccd9cfbdfb4fad0d4bdcbd7a922de211c531370261e613",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaohua/normal.webp",
+      "sha256": "9a03adad89e96ba8537fe995ac86e745f342ca583da0bf5b77a978e43d897178",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaohua/reading.webp",
+      "sha256": "0b4945fbcb8c36f8c52c7a0c51f6a9ce7afca907315bc597bf019480059480d5",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaohua/thinking.webp",
+      "sha256": "336b495774d4b9a06b871d6ff72eb42e3c266a8462df1d1ce77a98a240f8c8e2",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaohua/wearing_backpack.webp",
+      "sha256": "2f791ee76cfa7f25f477d5181b95fffd3f16e8853ff5c18a78814c3a48085211",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaohua/writing.webp",
+      "sha256": "f67d3ce130bab08a2c6b4496c6aa7eeaea0fb9916f5eb860112833a38995cb14",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaojiang/eating.webp",
+      "sha256": "97219c307e109e21f2c32a80c09bb9ea90849264d4aedff756698551d0b991da",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaojiang/military_attention.webp",
+      "sha256": "23111723bd5d39f7bb56f4c98a5366c579fa5e2b6f9e08d512345bd66fad0fc8",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaojiang/military_rest.webp",
+      "sha256": "a8145ade515da5bc5af2aaa99f395c91427718d820113a42094ef06e86788b65",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaojiang/normal.webp",
+      "sha256": "af2bc90bd7485fdb99b36a3ef2770459eefdebca11ce4525eae9034fcf940752",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaojiang/reading.webp",
+      "sha256": "5de9d7198d6f70c4dedf650fa966259fbb4c691d528bfa00a55ac3365a140ca8",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaojiang/thinking.webp",
+      "sha256": "d214fff504045fb911aca13f5d340ee8070c6d48e77af05889434cdb95b8179d",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaojiang/wearing_backpack.webp",
+      "sha256": "22f6d7361cf58bbe7de25031c2a45c376545198bba7a2ba99876de7c2c67ea5a",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaojiang/writing.webp",
+      "sha256": "6b30f7855f4fae88eb44f568bad624f91a8c568e81d8bc4c7e5379ca928c68d3",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaorui/badminton.webp",
+      "sha256": "8151657a3d44c0048ad974a38ea1c40f7d939d8b975341f530debda4a8ca0f73",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaorui/eating.webp",
+      "sha256": "c62028e5b67f1c0d179b601d349a509c22db8f0d84dd9400fce0dd37c23239e5",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaorui/military_attention.webp",
+      "sha256": "4de66aa0d3fd89404481234192b192dc202d4e8a66c600ab139abc6dad0090e7",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaorui/military_rest.webp",
+      "sha256": "cc983d7df9e7f969472575e36b2c3d830ba120ba95be4b0d98db98d5b0aed674",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaorui/normal.webp",
+      "sha256": "58284f1bb1bde3119ce76441fbc872140935cf5b09ab686d29134ea865928d2d",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaorui/reading.webp",
+      "sha256": "86205b0152917889c82fe6a24a73fbe48b55d7edb7c6869beca8ec97e231b8d5",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaorui/thinking.webp",
+      "sha256": "3d6c7a39cd4523b0eb799b9a4a3c4753ea8e0f54dd3f2ce75db4d1037c4ee766",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaorui/wearing_backpack.webp",
+      "sha256": "0f83c62a3dada09a3d25cd7df6f1aa2941d0e5823f39fc24321b8d5a1e2ea2d5",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaorui/writing.webp",
+      "sha256": "443633e88d026045d9d35275b04d92d9a101ae4687adbfce5f644cd567f7a347",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaosun/holding_laugh.webp",
+      "sha256": "aea0f62e4b4e59f94222e095f413a745e618fdbe7931cbf6463f5b45cad7028c",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaosun/looking_up.webp",
+      "sha256": "bca45960dec6ae4400083fa88bc90d6d61bf38f1cbfe6534fd29a1d924b18653",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaosun/military_looking_up.webp",
+      "sha256": "1ce46b0dd60a4e72c10ebdc956b290689a0e112cec5086f082b6eb530f454ff8",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaosun/military_writing.webp",
+      "sha256": "4da939ee0ad189c5c65127d50d357f35787e08d73c79563e090091060abc595d",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaosun/normal.webp",
+      "sha256": "00d972194e6cac503d089553bfd803ad1654f7f62a4872272d23ba33a952aa03",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaosun/packing_bag.webp",
+      "sha256": "1d65a3946d08d7da04564cab98e046dfe9bfc852cedf242fa76cd8b4b438dfcd",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaosun/writing.webp",
+      "sha256": "b2751aa871f38abb05cfbf5e9480ded6b74de118f6b0914e38d48e74ac916117",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxi/eating.webp",
+      "sha256": "15be9bfac453ec3b248f2b73837895fce79ce01bf7c363cd2b74380efb10db39",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxi/military_attention.webp",
+      "sha256": "03619eec9eb91c27e299dc88626eb2efad0fbeb0e782397d9e0c82e604296239",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxi/military_rest.webp",
+      "sha256": "93d22f784dc2621890f3a8f716d413fc69878c657b1c3d4db7361e854fa0d547",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxi/normal.webp",
+      "sha256": "8e498ff4127c1090067fb30d26ba572563a402ebcdac14b8d27c2ead2fefc782",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxi/reading.webp",
+      "sha256": "b11e9c787db8b75d1c7ad4baeb31d11d955277a2993196a0df33cb04c2e6b799",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxi/thinking.webp",
+      "sha256": "df967099e1755f6543dfcdee32d1d777a3e2c9a86f6451bb0f849f3896e02588",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxi/wearing_backpack.webp",
+      "sha256": "a6767f57116fc30e8915efa8c1be7ef28221f47a4cca03cac1e943b937c78030",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxi/writing.webp",
+      "sha256": "68b9eed63b25d63b23e33c4f961b9aee55001bcc30f4495483eee5ce6c9ed01b",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxu/adjusting_glasses.webp",
+      "sha256": "8526457a0486ddfc6c61bc8e2b4f7c4ab16a119f94638dca78c5ffaa7dd687b4",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxu/calling_jiaoguan.webp",
+      "sha256": "4d349121faa89698f570d4dedc3568cdfc2621c585029d825f6740fcf6087373",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxu/holding_laugh.webp",
+      "sha256": "75ba7c0423a4b20150ce7c3b63df81c98974202b9d627be8d85512e65200819c",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxu/laughing.webp",
+      "sha256": "ea7db43383f874bb6083f5593f7c2ae17f5e2088936d7aa0e39aa388321801ea",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxu/leaving.webp",
+      "sha256": "ae7564e80e29c0a7c7983754324bd8807ea8f68ba20c809f0b0ea44e56d6823d",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxu/looking_at_liaosiyu.webp",
+      "sha256": "84bd5fcaaf38ce23971847c1c23ecf9cacc27192f503dbb8e01a905fadbedc69",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxu/mischievous.webp",
+      "sha256": "b1328a27d69f123b5d3433cfcb2b9de69325fc9fb2f30f18590d348d23b37189",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxu/normal.webp",
+      "sha256": "6296338b00e0b54ad11cc6ac669fe45789b404fc6abaf11f6d98534e3c31f6c5",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoxu/teasing.webp",
+      "sha256": "64bfec7cdcf53200fa61cba6c9e672dbc23ba5667751949766bff6ab47a6e9d9",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoying/eating.webp",
+      "sha256": "9f148c582f368e86cb937b80a5559eb5e2aa22219c9be16a773d317d6d7a7f97",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoying/military_attention.webp",
+      "sha256": "c239cc991dad986d2bc3613b8f74773f9846a44bcbc5c433bcd9aa32d7887f8f",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoying/military_rest.webp",
+      "sha256": "bc0b5e43b745cd5ee8bd94b9d11c8f2518e100efde7959916dba4bfd385af20c",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoying/normal.webp",
+      "sha256": "c611d86eba87f05d1560342807a3e2b7d3fec88edbb9831876de37572ed03e5a",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoying/reading.webp",
+      "sha256": "affe4134a52c5d74df60470c3431c0c03aee41e270ee0575f1bef4f3d0237c57",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoying/thinking.webp",
+      "sha256": "c3931b816edf880991cdf9eb49406dca577e073ca45d909ff859cef6dd259ccb",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoying/wearing_backpack.webp",
+      "sha256": "06d7e246b77a512d2e88dde6f808ec5fc10c7436603d0cd4a1a9b26c73ca1e0f",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoying/writing.webp",
+      "sha256": "bc78b9201ff5e11a3c64aa7376693d8367b49afa970360aaf8517cb1d1462325",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoyu/eating.webp",
+      "sha256": "252057907ae99bbb8ca18d299689231ea3c89e8f2464206f1ff52a40332ee6ae",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoyu/filming.webp",
+      "sha256": "ba1ac4f2106a691211ade3ab82f05fd612d0eaba01c6d70f80dbc05391a727d1",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoyu/military_attention.webp",
+      "sha256": "18cc5d51cf79c05eb8fd5eaaab20481f0e3aaa3ff02c2dcea240759016411036",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoyu/military_rest.webp",
+      "sha256": "51e49d949ccc3f9f82ce16808833d17fd0df7256fbc63a9df5e7cd83078b143e",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoyu/normal.webp",
+      "sha256": "38d22ed27dbdd27281d70d4a919e3b92dab4f43674825260494bd095c433b76d",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoyu/reading.webp",
+      "sha256": "edb967046fb7be3a21764088b1a5f5591b15051c2a8a9e8c2c66adf5c0198c63",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoyu/thinking.webp",
+      "sha256": "1cd691be7068d94cb8ab5451a75bb48e90c51b6c746fbf0bd7c79572cf129549",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoyu/wearing_backpack.webp",
+      "sha256": "d5a8bd4d797d8f2fd4750d21e37697835764126c4a2b6dd9a83419069e062ab8",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaoyu/writing.webp",
+      "sha256": "fc83db352768dcee3fa5d985801c490a0f3b0d85fc0b9648f5298655a56f9d88",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaozhang/confused.webp",
+      "sha256": "5d7193440b0489d07d240995c13b34ce3a76d18c29a67851f984dc9558e5f515",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaozhang/curious.webp",
+      "sha256": "cb3ce1900612bbd00373a6f0d56ebebb64ac8bd50683758b85842bcf0eb3b9a0",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaozhang/laughing.webp",
+      "sha256": "53104e2a5df4617cd3f488a42d3b73b5eadc500abe62eac40c00f4d8d1681f5b",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaozhang/listening.webp",
+      "sha256": "49c614fcd2587e6dba066768aaff5aac0558a8d7aa9bd60957e14480bd562523",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaozhang/military_confused.webp",
+      "sha256": "7b6de6096c3de932b04b15e05513a38adafeb8f314807b16385261e276d3118d",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaozhang/military_normal.webp",
+      "sha256": "988868d572ebaed95d90bcd3fe5a3a2c5d4bf541b05cf2eeca5b603dd7999fc9",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaozhang/normal.webp",
+      "sha256": "86bdce8549afdc581685bf779dae2cb176bc60b285ad107ffe5c25678f5e0669",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/afternoon.webp",
+      "sha256": "4a3eee0d62313ca64679af11583467b4aa0f6a0954653b75273446395c80ffa2",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/classroom.webp",
+      "sha256": "4f7e6367beda0bab20c2761b9c7670248b7b4ef73d8188d0e40f9cb590b4832c",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/empty.webp",
+      "sha256": "7e5c74e776f95bc98658739d1eb11e0e937c1dae26b576b7fbfae2bcdfa9b7f5",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/hallway.webp",
+      "sha256": "edfcf1936cd5b2ed78817d8b501772f5c580de290c2f6b0a71f04d78a68724d5",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/lunch.webp",
+      "sha256": "54294c9e33402c262616348402e8f6787a477a8bab2acbc36639509c446be95b",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/military.webp",
+      "sha256": "4f5cc0ac0254d5ad832c598963490e5e9e64c074612d237f1d0bd338021bdffd",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/night.webp",
+      "sha256": "f5c2bfeeb5f834138cccff70cfc3e8b4978a1dba10901dbb5c1df253d1e79ffe",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/pe.webp",
+      "sha256": "d89135764149b1bf29aaaa93083abf0effdf8cb39354231a9166edc5650de55b",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/rainy.webp",
+      "sha256": "373c6a7bb5a4c76b376ad678e0e59e7e56890dcd5bb0b362b90fc787d54096ce",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/rest.webp",
+      "sha256": "8bf1f9d3324672da6ef7687aa149a34779b8ec99c36b61e270b77912070f936e",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/backgrounds/sunset.webp",
+      "sha256": "1d5fc4e10c83bd096311575680bc3b5fc1bd53387f5b3dc4bbae33b885ead5f7",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_100_percent.webp",
+      "sha256": "5788ee09e242b7ac73b923b3676f5426b52d2105256db0933e9e58bf27888f2f",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_badminton.webp",
+      "sha256": "7560017c2bf8db391d340cd744e5b00f14303fe63dca78b68b3d46966edae0ff",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_chen.webp",
+      "sha256": "a8eea7d9ac388fa903d91a2318131c6d96f1e66988da4417bc590181187d983f",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_departure.webp",
+      "sha256": "f9dcac1fe7afd53cf1f748c053759f329d19f31085151d7fea0c5439aa3425a3",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_evening.webp",
+      "sha256": "4d2760328e3c767f0666e02841e3263104646e7016653248ed11857058233e90",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_exam.webp",
+      "sha256": "f25453c7e95bf303f0dbfdaa4c7bebe2013ea5cf716abc396bcf5594a554b469",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_filming.webp",
+      "sha256": "1414d62da3b3611d3990f78d51df5d0427fc2a2096ab1e9040b9d3315392899b",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_group.webp",
+      "sha256": "13a1fa826b24257f3e02e5d52d5e8b2088d1cf7751deb9742f09423c2184eebc",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_hat.webp",
+      "sha256": "b45d032902b8a681f8672c8e891d9a54a5c7f38160e7fe456c8044c72325c92b",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_lunch_history.webp",
+      "sha256": "e68d2859b6ea2c761faccb762a6ed2c58c58da5d081276398384ed476f151e9a",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_lunch_no_visit.webp",
+      "sha256": "47322cb53dc44052ff58dcde7e3ead9ef59124dd2d976f06ef71321ebc9c0ad4",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_military_first.webp",
+      "sha256": "3074c126b3c9ed1433cd89b1cf41c7ca13876349141a30e9db5269b4f0fd276e",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_military_posture.webp",
+      "sha256": "7142b9f7795cf43b6e2ef90fe893a97b53f4ccd779a931f699e9a150e18e7ef1",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_pe.webp",
+      "sha256": "2bf9485669734854ffaea0e0a7e16daba9e5101fa4397dfd9a5b524ed4ee4610",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/cg/cg_rain.webp",
+      "sha256": "64dd013a555105f1ee253bacfef5961c3181c6dd765d4ee4bcd895973f830b3a",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_100_percent.webp",
+      "sha256": "06a8ac36092d45c787066e2436c9b610b220bdb58b9991881f491257c7f4067f",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_badminton.webp",
+      "sha256": "f4d0d91e33b44a464158b83eb2f4b6479cdcd85a5dd61c1933ef89f9e54f939c",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_chen.webp",
+      "sha256": "97f14fc202a97ab335eca5d8c761a2efb98e19df5cdc3bc5521b53cbc9fc9004",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_departure.webp",
+      "sha256": "3732de02b4cfdea473b4e63d053fda2426e52a06b5a786c1263bbdab98ae1531",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_evening.webp",
+      "sha256": "b85c0b588d59a0c54f6a8522bcda0335c88bc7d3a2af8370c02734500e8c1bf1",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_exam.webp",
+      "sha256": "b3e9a5094ffa6d97b9930775dd498e16091e9897ba8397dea11bf29253c8ba25",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_filming.webp",
+      "sha256": "382f002b7adfe198bc843b145b813bd1f5920763114ba04f984647f04c444383",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_group.webp",
+      "sha256": "3319213b460a75e54ec7a670e82ab8f0b2b7ed2242d44a4a35da84ab7a56b04a",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_hat.webp",
+      "sha256": "4e7f5e2020987b96091488d54b9c5288eba8b42b9c0d94a716cc9ecd034a29cd",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_lunch_history.webp",
+      "sha256": "60a17fd4365e0a9ba11c93e547b52deede709beed44ceba54a23dbe83847dfc6",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_lunch_no_visit.webp",
+      "sha256": "c0d446a99a633a19d940b6cc47dd05888f51fd7a7d800d8e051e0566bde2cb5c",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_military_first.webp",
+      "sha256": "6950a09f870a9941e3a4355fc3ee9685f40d297b094485d56281ff5e5322e466",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_military_posture.webp",
+      "sha256": "633279c6b22044bc1670865b17b399c01c565a359bbb8c3bfe90b41704b52e35",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_pe.webp",
+      "sha256": "14cadfa326a85de5db2c754f6fcca2bcfe9719424e44bb268581e894b9f4748d",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/thumbnails/cg_rain.webp",
+      "sha256": "aed64e2426554e3c06634942f8d314ecb6a889ec17d37b6a2b47c0ffa21352fa",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    }
+  ]
+}

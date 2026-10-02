@@ -1,7 +1,9 @@
 'use strict';
 /* Private, versioned local storage. Never read/remove another site's Settings/gallery. */
 (function () {
-  const prefix = 'Jiaoguan.v3.';
+  const prefix = 'Jiaoguan.v4.';
+  const previousPrefix = 'Jiaoguan.v3.';
+  const version = '4.2.0', schema = 4;
   const memory = new Map();
   const listeners = { create: [], update: [], delete: [] };
   let persistent = true;
@@ -22,7 +24,7 @@
     let raw;
     try { raw = disk.getItem(prefix + key); } catch (_) { return undefined; }
     if (raw === null) return undefined;
-    try { return JSON.parse(raw); } catch (_) { return undefined; }
+    try { return JSON.parse(raw); } catch (_) { return null; }
   }
   function write(key, value) {
     memory.set(key, clone(value));
@@ -48,7 +50,7 @@
     return values;
   }
   const adapter = {
-    configuration() { return { name: 'jiaoguan', version: '3.0.0', store: 'v3' }; },
+    configuration() { return { name: 'jiaoguan', version, store: 'v4' }; },
     async get(key) {
       const value = read(key);
       if (value === undefined) throw new Error('No saved value for ' + key);
@@ -76,10 +78,27 @@
   function validSave(value) {
     const story = window.monogatari?.script();
     const state = value?.game?.state;
-    return Boolean(state && value.game.storage?.schema === 3 && Array.isArray(story?.[state.label]) && Number.isInteger(state.step) && state.step >= 0 && state.step < story[state.label].length);
+    return Boolean(state && [version, '4.1.0', '4.0.0'].includes(value.version) && value.game.storage?.schema === schema && value.game.history && Array.isArray(state.characters) && Array.isArray(state.music) && Array.isArray(story?.[state.label]) && Number.isInteger(state.step) && state.step >= 0 && state.step < story[state.label].length);
+  }
+  function journal(data) {
+    return {
+      events: data?.events && typeof data.events === 'object' && !Array.isArray(data.events) ? clone(data.events) : {},
+      choices: Array.isArray(data?.choices) ? clone(data.choices) : []
+    };
+  }
+  let migrated = false;
+  if (disk && !read('migration')) {
+    for (const key of ['Settings', 'presentation', 'gallery']) {
+      try {
+        const raw = disk.getItem(previousPrefix + key);
+        if (raw && read(key) === undefined) { write(key, JSON.parse(raw)); migrated = true; }
+      } catch (_) {}
+    }
+    write('migration', { version, migrated, date: new Date().toISOString() });
   }
   window.JiaoguanStorage = {
-    prefix, adapter, read, validSave,
+    prefix, adapter, read, write, validSave, version, schema, journal,
+    get migrated() { return Boolean(read('migration')?.migrated); },
     get persistent() { return persistent; },
     get failure() { return failure; },
     async saves() {
@@ -88,11 +107,17 @@
     clearSaves() {
       Object.keys(all()).filter((key) => /^(JiaoguanSave_|JiaoguanAuto_)/.test(key)).forEach((key) => adapter.remove(key));
     },
-    resetAll() { Object.keys(all()).forEach((key) => adapter.remove(key)); },
+    resetAll() {
+      Object.keys(all()).forEach((key) => adapter.remove(key));
+      write('migration', { version, migrated: false, date: new Date().toISOString() });
+    },
     get legacyCount() {
-      try { return Object.keys(disk || {}).filter((key) => /^Jiaoguan(Save|Auto)_/.test(key)).length; } catch (_) { return 0; }
+      try {
+        return Object.keys(disk || {}).filter((key) => /^Jiaoguan(Save|Auto)_/.test(key) || key.startsWith(previousPrefix + 'JiaoguanSave_') || key.startsWith(previousPrefix + 'JiaoguanAuto_')).length;
+      } catch (_) { return 0; }
     }
   };
   // The engine accepts its public storage interface before init; vendor remains untouched.
   monogatari.Storage = adapter;
+  monogatari.storage({ events: {}, choices: [] });
 })();
