@@ -38,7 +38,7 @@
       latest.textContent = store.validSave(automatic) ? '自动存档 · ' + (automatic.meta?.chapter || automatic.sceneId) : '';
     }
     const note = document.getElementById('jg-title-note');
-    if (note) note.textContent = store.read('completion') ? '已通关 · 校园视觉小说 4.2.0' : '校园视觉小说 · 4.2.0';
+    if (note) note.textContent = store.read('completion') ? '已通关 · 校园视觉小说 4.2.1' : '校园视觉小说 · 4.2.1';
   }
   function setChapter(chapter) {
     const game = document.querySelector('game-screen');
@@ -149,9 +149,9 @@
   }
   function aboutMarkup() {
     return `<div class="about-copy"><h3>教官<span>v${esc(store.version)}</span></h3>
-      <p>一部以九月校园为背景的视觉小说。从军训、午休到晚自习，在普通的对话和选择里，慢慢认识廖思宇与身边的同学。</p>
+      <p>一款攻略廖思宇的一款视觉小说。</p>
       <dl><div><dt>游戏引擎</dt><dd><a href="https://monogatari.io/" target="_blank" rel="noopener noreferrer">Monogatari 2.8.0</a></dd></div>
-        <div><dt>开发制作</dt><dd>Codex + GPT-6.1 Sol 辅助制作</dd></div></dl>
+        <div><dt>开发制作</dt><dd>GPT-6.1Sol</dd></div></dl>
       <a class="about-repository" href="https://github.com/XiaoRui114514/jiaoguan" target="_blank" rel="noopener noreferrer"><span class="fab fa-github" aria-hidden="true"></span>GitHub · XiaoRui114514 / jiaoguan<span class="fas fa-external-link-alt" aria-hidden="true"></span></a>
       <details class="about-credits"><summary>音乐与音效署名</summary>
         <p>配乐：Cynic Music / The Cynic Project、Écrivain、Matthew Pablo、Yoiyami。环境与音效：Kenney、Spring Spring、dklon、leonelmail、Fupi。</p>
@@ -253,7 +253,7 @@
   function init() {
     applyPresentation();
     const main = document.querySelector('main-screen');
-    main.insertAdjacentHTML('afterbegin','<div class="title-lockup"><p class="title-season">九月 / 上海</p><h1>教官<span class="title-dot">。</span></h1><p class="title-tagline">一开始，我只是觉得这个人很好玩。</p></div><img class="title-character" src="assets/characters/liaosiyu/wearing_backpack.webp" alt="廖思宇" decoding="async"><div class="title-colophon"><span id="jg-title-note">校园视觉小说 · 4.2.0</span><span>JIAOGUAN</span></div>');
+    main.insertAdjacentHTML('afterbegin','<div class="title-lockup"><p class="title-season">九月 / 上海</p><h1>教官<span class="title-dot">。</span></h1><p class="title-tagline">一开始，我只是觉得这个人很好玩。</p></div><img class="title-character" src="assets/characters/liaosiyu/wearing_backpack.webp" alt="廖思宇" decoding="async"><div class="title-colophon"><span id="jg-title-note">校园视觉小说 · 4.2.1</span><span>JIAOGUAN</span></div>');
     main.insertAdjacentHTML('beforeend','<small id="jg-continue-location" hidden></small>');
     const game = document.querySelector('game-screen');
     game.insertAdjacentHTML('afterbegin','<div class="game-topline"><span id="jg-chapter">九月 · 军训</span><span class="topline-title">教官</span></div><button id="jg-next" type="button" data-action="jg-next" aria-label="下一句" title="下一句"><span class="fas fa-arrow-right" aria-hidden="true"></span></button>');

@@ -105,14 +105,14 @@
     const label = this.state('label');
     const events = { ...(data.events || {}), [label]: { chapter: data.chapter, timestamp: new Date().toISOString() } };
     this.storage({ events });
-    await this.Storage.set('completion', { date: new Date().toISOString(), version: '4.2.0', bond: data.bond, flags: data.flags, events, choices: data.choices || [] });
+    await this.Storage.set('completion', { date: new Date().toISOString(), version: '4.2.1', bond: data.bond, flags: data.flags, events, choices: data.choices || [] });
     await this.Storage.remove('JiaoguanAuto_1');
   });
   const reset = () => f(function () {
     this.autoPlay(false); this.skip(false);
-    this.storage({ schema: 4, version: '4.2.0', bond: 0, flags: {}, chapter: '九月 · 军训', backgroundId: 'military', bgmId: 'military', act7_open: '', act7_tail: '' });
+    this.storage({ schema: 4, version: '4.2.1', bond: 0, flags: {}, chapter: '九月 · 军训', backgroundId: 'military', bgmId: 'military', act7_open: '', act7_tail: '' });
   });
-  monogatari.storage({ schema: 4, version: '4.2.0', bond: 0, flags: {}, chapter: '九月 · 军训', backgroundId: 'military', bgmId: 'military', act7_open: '', act7_tail: '' });
+  monogatari.storage({ schema: 4, version: '4.2.1', bond: 0, flags: {}, chapter: '九月 · 军训', backgroundId: 'military', bgmId: 'military', act7_open: '', act7_tail: '' });
   window.JiaoguanStage = { f, action, scene, clearCharacters, showCharacter, hideCharacter, moveCharacter, approachDesk, changeExpression, changeBackground, playBgm, playSe, showCG, hideCG, shakeScreen, fadeScreen, wait, bond, branchText, pausePlayback, finish, reset };
 })();
 

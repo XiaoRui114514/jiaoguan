@@ -12,7 +12,7 @@ const failures = [];
 const release = JSON.parse(fs.readFileSync(path.join(root, 'dist/release-manifest.json'), 'utf8'));
 const declared = new Map(release.files.map(file => [file.path, file]));
 const review = JSON.parse(fs.readFileSync(path.join(root, 'assets/art-review-v4.json'), 'utf8'));
-if (release.version !== '4.2.0') failures.push('Incorrect release version');
+if (release.version !== '4.2.1') failures.push('Incorrect release version');
 for (const p of files) {
   const rel = path.relative(path.join(root, 'dist'), p).replaceAll('\\', '/');
   if (/(^|\/)(素材|reference|private|workbench)(\/|$)|\.(jpg|jpeg|psd|kra)$/i.test(rel)) failures.push(rel);

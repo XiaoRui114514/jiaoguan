@@ -45,5 +45,5 @@ for (const file of [...files].sort()) {
   manifest.push({ path: file, bytes: content.length, sha256: crypto.createHash('sha256').update(content).digest('hex') });
 }
 fs.writeFileSync(path.join(output, '.nojekyll'), '');
-fs.writeFileSync(path.join(output, 'release-manifest.json'), JSON.stringify({ version: '4.2.0', files: manifest }, null, 2));
-console.log(JSON.stringify({ version: '4.2.0', files: files.size, bytes: manifest.reduce((n, f) => n + f.bytes, 0), output }, null, 2));
+fs.writeFileSync(path.join(output, 'release-manifest.json'), JSON.stringify({ version: '4.2.1', files: manifest }, null, 2));
+console.log(JSON.stringify({ version: '4.2.1', files: files.size, bytes: manifest.reduce((n, f) => n + f.bytes, 0), output }, null, 2));
