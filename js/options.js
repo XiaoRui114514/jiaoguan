@@ -1,6 +1,6 @@
 'use strict';
 monogatari.settings({
-  Name: '教官', Version: '4.2.1', Label: 'Start', Slots: 6,
+  Name: '教官', Version: '4.2.2', Label: 'Start', Slots: 6,
   MultiLanguage: false, LanguageSelectionScreen: false, MainScreenMusic: '',
   SaveLabel: 'JiaoguanSave', AutoSaveLabel: 'JiaoguanAuto', ShowMainScreen: true,
   Preload: false, AutoSave: 0, ServiceWorkers: false, AspectRatio: '16:9',

@@ -3,7 +3,7 @@
 (function () {
   const prefix = 'Jiaoguan.v4.';
   const previousPrefix = 'Jiaoguan.v3.';
-  const version = '4.2.1', schema = 4;
+  const version = '4.2.2', schema = 4;
   const memory = new Map();
   const listeners = { create: [], update: [], delete: [] };
   let persistent = true;
@@ -78,7 +78,7 @@
   function validSave(value) {
     const story = window.monogatari?.script();
     const state = value?.game?.state;
-    return Boolean(state && [version, '4.2.0', '4.1.0', '4.0.0'].includes(value.version) && value.game.storage?.schema === schema && value.game.history && Array.isArray(state.characters) && Array.isArray(state.music) && Array.isArray(story?.[state.label]) && Number.isInteger(state.step) && state.step >= 0 && state.step < story[state.label].length);
+    return Boolean(state && [version, '4.2.1', '4.2.0', '4.1.0', '4.0.0'].includes(value.version) && value.game.storage?.schema === schema && value.game.history && Array.isArray(state.characters) && Array.isArray(state.music) && Array.isArray(story?.[state.label]) && Number.isInteger(state.step) && state.step >= 0 && state.step < story[state.label].length);
   }
   function journal(data) {
     return {

@@ -166,6 +166,24 @@ centered-dialog { z-index: 18; color: var(--color-paper); font-family: var(--fon
 .about-repository svg { flex: 0 0 14px; width: 14px; }
 .about-credits { margin-top: 24px; border-top: 1px solid var(--color-rule); padding-top: 16px; font-size: 12px; color: var(--color-ink-2); }
 .about-credits summary { cursor: pointer; color: var(--color-ink); }
+.announcement-copy { max-width: 760px; margin: 0 auto; font-size: 14px; line-height: 1.85; }
+#jg-panel[data-view='announcement'] { width: min(820px,calc(var(--jg-width) * .9)); }
+.announcement-warning { margin: 0 0 28px; padding: 16px 18px; border-left: 5px solid #b42318; background: #fff1f0; color: #b42318; font-size: clamp(24px,3.2vw,38px); font-weight: 800; line-height: 1.35; letter-spacing: .02em; }
+.announcement-copy section { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--color-rule); }
+.announcement-copy h3 { margin: 0 0 10px; color: var(--color-ink); font-size: 18px; }
+.announcement-copy p { margin: 10px 0; }
+.announcement-copy dl { margin: 14px 0; }
+.announcement-copy dl div { display: grid; grid-template-columns: max-content max-content; justify-content: center; gap: 12px; padding: 5px 0; }
+.announcement-copy dt { color: var(--color-ink-2); }
+.announcement-copy dd { margin: 0; }
+.announcement-copy a { color: var(--color-accent); text-underline-offset: 4px; overflow-wrap: anywhere; }
+.announcement-copy .about-repository { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 13px; }
+.announcement-copy .about-repository svg { flex: 0 0 14px; width: 14px; }
+.announcement-copy .about-credits { margin-top: 20px; }
+.announcement-copy ul { margin: 0; padding-left: 1.4em; }
+.announcement-copy li + li { margin-top: 6px; }
+.announcement-confirm { display: block; min-width: 130px; margin: 28px auto 0; color: var(--color-paper) !important; background: var(--color-accent) !important; border-color: var(--color-accent) !important; }
+.announcement-confirm:hover:not(:disabled) { color: var(--color-paper) !important; background: var(--color-ink) !important; }
 .settings-bottom { display: flex; gap: var(--space-md); align-items: center; margin-top: var(--space-xl); border-top: 1px solid var(--color-rule); padding-top: var(--space-lg); }
 .settings-bottom span { margin-left: auto; font-size: 11px; color: var(--color-ink-2); }
 .gallery-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-lg) var(--space-md); }

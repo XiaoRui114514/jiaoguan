@@ -4,7 +4,10 @@
   const esc = (text) => String(text ?? '').replace(/[&<>"']/g, (char) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
   let panel, content, title, view = '', previousFocus, galleryIndex = 0, toastTimer, autoToastTimer, rendering = 0, loading = false;
   let presentation = store.read('presentation') || { size: 'normal', motion: true };
-  const titles = { menu: '暂停', save: '保存游戏', load: '读取存档', settings: '设置', about: '关于', gallery: 'CG 鉴赏', confirm: '返回标题' };
+  const titles = { menu: '暂停', save: '保存游戏', load: '读取存档', settings: '设置', about: '关于', announcement: '更新公告', gallery: 'CG 鉴赏', confirm: '返回标题' };
+  // The current game version doubles as the announcement version. A new release
+  // therefore shows the notice once without touching saves or presentation data.
+  const announcementVersion = store.version;
   function routeNames() {
     return Object.fromEntries(Object.entries(engine.script()).filter(([, lines]) => Array.isArray(lines)).map(([id, lines]) => {
       const act = lines.find((line) => typeof line === 'string' && /^centered ACT\s/.test(line));
@@ -38,7 +41,7 @@
       latest.textContent = store.validSave(automatic) ? '自动存档 · ' + (automatic.meta?.chapter || automatic.sceneId) : '';
     }
     const note = document.getElementById('jg-title-note');
-    if (note) note.textContent = store.read('completion') ? '已通关 · 校园视觉小说 4.2.1' : '校园视觉小说 · 4.2.1';
+    if (note) note.textContent = store.read('completion') ? `已通关 · 校园视觉小说 ${store.version}` : `校园视觉小说 · ${store.version}`;
   }
   function setChapter(chapter) {
     const game = document.querySelector('game-screen');
@@ -159,6 +162,30 @@
         <a href="assets/audio/CREDITS.md" target="_blank" rel="noopener noreferrer">完整来源与许可</a>
       </details></div>`;
   }
+  function announcementMarkup() {
+    return `<div class="announcement-copy">
+      <p class="announcement-warning" role="alert">禁止乱磕cp，乱磕cp死全家！！！</p>
+      <section><h3>游戏介绍</h3>
+        <p>一款攻略廖思宇的一款视觉小说。</p>
+        <dl><div><dt>游戏引擎</dt><dd>Monogatari 2.8.0</dd></div>
+          <div><dt>开发制作</dt><dd>GPT-6.1Sol</dd></div></dl>
+        <a class="about-repository" href="https://github.com/XiaoRui114514/jiaoguan" target="_blank" rel="noopener noreferrer"><span class="fab fa-github" aria-hidden="true"></span>GitHub · XiaoRui114514 / jiaoguan<span class="fas fa-external-link-alt" aria-hidden="true"></span></a>
+        <details class="about-credits"><summary>音乐与音效署名</summary>
+          <p>配乐：Cynic Music / The Cynic Project、Écrivain、Matthew Pablo、Yoiyami。环境与音效：Kenney、Spring Spring、dklon、leonelmail、Fupi。</p>
+          <p>Snowland Town © Matthew Pablo；Crickets © dklon，采用 <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>。其余音频采用 CC0。音频经过音量调整、循环处理与格式转换；铃声经重新编排。</p>
+          <a href="assets/audio/CREDITS.md" target="_blank" rel="noopener noreferrer">完整来源与许可</a>
+        </details>
+      </section>
+      <section><h3>更新日志</h3>
+        <ul><li>新增更新公告，集中展示游戏介绍、更新内容与免责协议。</li>
+          <li>整理“关于”页面的游戏介绍与制作信息。</li></ul>
+      </section>
+      <section><h3>免责协议</h3>
+        <p>本游戏为虚构的校园视觉小说。人物、地点、事件、关系与对话均为创作内容，不对应现实中的特定个人或事件。请将游戏内容与现实生活区分开来，理性游玩。</p>
+      </section>
+      <button type="button" class="announcement-confirm" data-ui-action="announcement-close">我知道了</button>
+    </div>`;
+  }
   function menuMarkup() {
     return `<p class="pause-chapter">${esc(engine.storage('chapter') || '九月')}</p><nav class="pause-menu" aria-label="游戏菜单">
       ${button('继续','resume')}${button('存档','save')}${button('读档','load')}${button('历史','history')}
@@ -175,6 +202,7 @@
     else if (next === 'save' || next === 'load') html = await saveMarkup(next === 'load');
     else if (next === 'settings') html = settingsMarkup();
     else if (next === 'about') html = aboutMarkup();
+    else if (next === 'announcement') html = announcementMarkup();
     else if (next === 'gallery') html = await galleryMarkup();
     else if (next === 'confirm') html = `<div class="confirm-copy"><p>返回标题吗？当前进度已经自动记录，手动存档不会被覆盖。</p>${button('返回标题','confirm-title')}${button('留在这里','resume')}</div>`;
     if (ticket !== rendering) return;
@@ -184,6 +212,7 @@
   }
   function close(force = false) {
     if (view === 'gallery-view' && !force) { open('gallery'); return; }
+    if (view === 'announcement') store.write('announcementSeen', announcementVersion);
     rendering++; view = ''; panel.close(); previousFocus?.focus?.({ preventScroll: true });
   }
   function showGallery(index) {
@@ -201,7 +230,7 @@
   async function clickAction(event) {
     const el = event.target.closest('[data-ui-action]'); if (!el || el.disabled) return;
     const action = el.dataset.uiAction;
-    if (action === 'close' || action === 'resume') return close(true);
+    if (action === 'close' || action === 'resume' || action === 'announcement-close') return close(true);
     if (['save','load','settings','gallery'].includes(action)) return open(action);
     if (action === 'history') { close(true); return engine.runListener('dialog-log'); }
     if (action === 'auto' || action === 'skip') { close(true); Jiaoguan.playback.set(action); return; }
@@ -253,7 +282,7 @@
   function init() {
     applyPresentation();
     const main = document.querySelector('main-screen');
-    main.insertAdjacentHTML('afterbegin','<div class="title-lockup"><p class="title-season">九月 / 上海</p><h1>教官<span class="title-dot">。</span></h1><p class="title-tagline">一开始，我只是觉得这个人很好玩。</p></div><img class="title-character" src="assets/characters/liaosiyu/wearing_backpack.webp" alt="廖思宇" decoding="async"><div class="title-colophon"><span id="jg-title-note">校园视觉小说 · 4.2.1</span><span>JIAOGUAN</span></div>');
+    main.insertAdjacentHTML('afterbegin',`<div class="title-lockup"><p class="title-season">九月 / 上海</p><h1>教官<span class="title-dot">。</span></h1><p class="title-tagline">一开始，我只是觉得这个人很好玩。</p></div><img class="title-character" src="assets/characters/liaosiyu/wearing_backpack.webp" alt="廖思宇" decoding="async"><div class="title-colophon"><span id="jg-title-note">校园视觉小说 · ${store.version}</span><span>JIAOGUAN</span></div>`);
     main.insertAdjacentHTML('beforeend','<small id="jg-continue-location" hidden></small>');
     const game = document.querySelector('game-screen');
     game.insertAdjacentHTML('afterbegin','<div class="game-topline"><span id="jg-chapter">九月 · 军训</span><span class="topline-title">教官</span></div><button id="jg-next" type="button" data-action="jg-next" aria-label="下一句" title="下一句"><span class="fas fa-arrow-right" aria-hidden="true"></span></button>');
@@ -276,6 +305,9 @@
       } else {engine.preference(key,value);output.textContent=value+(key==='TextSpeed'?' ms':' 秒');}
     });
     installDebug(); refreshTitle(); refreshRuntime();
+    if (store.read('announcementSeen') !== announcementVersion) {
+      requestAnimationFrame(() => { if (!panel.open && !engine.global('playing')) open('announcement'); });
+    }
     if (!store.persistent) toast('浏览器禁止本地存档，本次可继续游玩，但刷新后记录可能消失。');
     else if (store.migrated && !store.read('migrationNotified')) {
       store.write('migrationNotified', true);
