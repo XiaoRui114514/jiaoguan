@@ -8,6 +8,7 @@ const JiaoguanCast = {
   xiaozhang: { name: '小张', color: '#b4c9bc', directory: 'xiaozhang', sprites: characterSprites(['normal','curious','confused','laughing','listening','military_normal','military_confused']) },
   xiaosun: { name: '小孙', color: '#b4c2d0', directory: 'xiaosun', sprites: characterSprites(['normal','writing','looking_up','holding_laugh','packing_bag','military_looking_up','military_writing']) },
   xiaochen: { name: '小陈', color: '#c5b6c1', directory: 'xiaochen', sprites: characterSprites(['normal','bending_forward','raising_hands','laughing','walking_away','military_normal','military_bending_forward','military_raising_hands','military_walking_away']) },
+  xiaozhu: { name: '小朱', color: '#b8c8a9', directory: 'xiaozhu', sprites: characterSprites(['normal']) },
   military_instructor: { name: '军训教官', color: '#c5c1a0', directory: 'military_instructor', sprites: characterSprites(['normal','military_instruction','serious','calling_student','demonstrating','slightly_confused','looking_at_liaosiyu']) },
   ...Object.fromEntries([['xiaohua','小桦','#b7c8a2'],['xiaorui','小瑞','#a9c7d9'],['xiaoxi','小希','#dbb6aa'],['xiaoying','小颖','#c7bfd6'],['xiaoyu','小羽','#c1cfcb'],['meili_xiaoxu','美丽的小徐','#c8c7db'],['xiaojiang','小蒋','#cbbba6']].map(([id,name,color]) => [id, {name,color,directory:id,sprites:characterSprites(['normal','writing','eating','reading','thinking','wearing_backpack','military_attention','military_rest'])}]))
 };

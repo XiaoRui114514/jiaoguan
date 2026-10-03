@@ -1,6 +1,6 @@
 {
-  "version": "4.1.0",
-  "date": "2026-10-02",
+  "version": "4.3.1",
+  "date": "2026-10-03",
   "method": "Visual review of final generated character, background and event CG contact sheets, followed by an independent source-photo hash comparison.",
   "files": [
     {
@@ -990,6 +990,12 @@
     {
       "path": "assets/thumbnails/cg_rain.webp",
       "sha256": "aed64e2426554e3c06634942f8d314ecb6a889ec17d37b6a2b47c0ffa21352fa",
+      "schoolIdentity": "clear",
+      "originalPhoto": false
+    },
+    {
+      "path": "assets/characters/xiaozhu/normal.webp",
+      "sha256": "5c42cd43146fa72da7c81a0a72d582630d5f0e7eacbbd7a66e286ea39ddac3fd",
       "schoolIdentity": "clear",
       "originalPhoto": false
     }

@@ -2,7 +2,7 @@
 (function () {
   const engine = monogatari, store = JiaoguanStorage;
   const esc = (text) => String(text ?? '').replace(/[&<>"']/g, (char) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
-  let panel, content, title, view = '', previousFocus, galleryIndex = 0, toastTimer, autoToastTimer, rendering = 0, loading = false;
+  let panel, content, title, view = '', previousFocus, galleryIndex = 0, toastTimer, autoToastTimer, bondTimer, rendering = 0, loading = false;
   let presentation = store.read('presentation') || { size: 'normal', motion: true };
   const titles = { menu: '暂停', save: '保存游戏', load: '读取存档', settings: '设置', about: '关于', announcement: '更新公告', gallery: 'CG 鉴赏', confirm: '返回标题' };
   // The current game version doubles as the announcement version. A new release
@@ -26,6 +26,19 @@
     if (!el || document.hidden) return;
     el.textContent = persistent ? '自动存档' : '临时自动记录'; el.classList.add('visible');
     clearTimeout(autoToastTimer); autoToastTimer = setTimeout(() => el.classList.remove('visible'), 1000);
+  }
+  function hideBondChange() {
+    clearTimeout(bondTimer);
+    document.getElementById('jg-bond-notice')?.classList.remove('visible');
+  }
+  function showBondChange(total, amount) {
+    const el = document.getElementById('jg-bond-notice');
+    if (!el) return;
+    el.querySelector('[data-bond-total]').textContent = String(total);
+    el.querySelector('[data-bond-delta]').textContent = `增加 +${amount}`;
+    el.classList.add('visible');
+    clearTimeout(bondTimer);
+    bondTimer = setTimeout(hideBondChange, 2400);
   }
   function applyPresentation() {
     document.documentElement.dataset.textSize = presentation.size;
@@ -177,7 +190,8 @@
         </details>
       </section>
       <section><h3>更新日志</h3>
-        <ul><li>新增更新公告，集中展示游戏介绍、更新内容与免责协议。</li>
+        <ul><li>加入小朱的课间互动、给教官送礼物的选择，以及送礼后的好感度提示。</li>
+          <li>新增更新公告，集中展示游戏介绍、更新内容与免责协议。</li>
           <li>整理“关于”页面的游戏介绍与制作信息。</li></ul>
       </section>
       <section><h3>免责协议</h3>
@@ -285,7 +299,7 @@
     main.insertAdjacentHTML('afterbegin',`<div class="title-lockup"><p class="title-season">九月 / 上海</p><h1>教官<span class="title-dot">。</span></h1><p class="title-tagline">一开始，我只是觉得这个人很好玩。</p></div><img class="title-character" src="assets/characters/liaosiyu/wearing_backpack.webp" alt="廖思宇" decoding="async"><div class="title-colophon"><span id="jg-title-note">校园视觉小说 · ${store.version}</span><span>JIAOGUAN</span></div>`);
     main.insertAdjacentHTML('beforeend','<small id="jg-continue-location" hidden></small>');
     const game = document.querySelector('game-screen');
-    game.insertAdjacentHTML('afterbegin','<div class="game-topline"><span id="jg-chapter">九月 · 军训</span><span class="topline-title">教官</span></div><button id="jg-next" type="button" data-action="jg-next" aria-label="下一句" title="下一句"><span class="fas fa-arrow-right" aria-hidden="true"></span></button>');
+    game.insertAdjacentHTML('afterbegin','<div class="game-topline"><span id="jg-chapter">九月 · 军训</span><span class="topline-title">教官</span></div><div id="jg-bond-notice" role="status" aria-live="polite"><span>教官好感度</span><strong data-bond-total>0</strong><em data-bond-delta>增加 +0</em></div><button id="jg-next" type="button" data-action="jg-next" aria-label="下一句" title="下一句"><span class="fas fa-arrow-right" aria-hidden="true"></span></button>');
     engine.registerListener('jg-next',{callback:()=>Jiaoguan.advance()});
     document.getElementById('jg-shell').insertAdjacentHTML('beforeend','<dialog id="jg-panel" aria-labelledby="jg-panel-title"><header class="panel-header"><div><small>教官 / JIAOGUAN</small><h2 id="jg-panel-title"></h2></div><button type="button" data-ui-action="close" aria-label="返回游戏" title="返回游戏"><span class="fas fa-times" aria-hidden="true"></span></button></header><div id="jg-panel-content"></div></dialog><div id="jg-toast" role="status" aria-live="polite"></div><div id="jg-auto-status" role="status" aria-live="polite"></div>');
     panel=document.getElementById('jg-panel');content=document.getElementById('jg-panel-content');title=document.getElementById('jg-panel-title');
@@ -314,7 +328,7 @@
       toast('已沿用 3.0 的阅读设置和已解锁 CG；旧存档保留，详情见读档页。');
     }
   }
-  window.JiaoguanUI={init,open,close,saveTo,load,continueGame,refreshRuntime,refreshTitle,setChapter,updatePlayback,galleryStep,toast,get isLoading(){return loading;},get isOpen(){return Boolean(panel?.open);},get view(){return view;}};
+  window.JiaoguanUI={init,open,close,saveTo,load,continueGame,refreshRuntime,refreshTitle,setChapter,updatePlayback,galleryStep,toast,showBondChange,hideBondChange,get isLoading(){return loading;},get isOpen(){return Boolean(panel?.open);},get view(){return view;}};
 })();
 
 

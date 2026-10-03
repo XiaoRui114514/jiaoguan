@@ -227,6 +227,11 @@ dialog-log button { min-height: 40px; margin-top: var(--space-lg); color: var(--
 #jg-toast.visible { opacity: 1; translate: -50% 0; }
 #jg-auto-status { position: absolute; right: 3.5%; top: 58px; z-index: 24; min-width: 88px; text-align: right; padding: 6px 10px; font-size: 11px; color: var(--color-dialog-text); background: var(--color-chrome-9); border-right: 2px solid var(--color-chrome-8); opacity: 0; pointer-events: none; transition: opacity var(--dur-fast); }
 #jg-auto-status.visible { opacity: 1; }
+#jg-bond-notice { position: absolute; top: 14%; left: 50%; z-index: 24; translate: -50% 8px; display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 0 12px; width: min(280px,56%); padding: 12px 16px; border-top: 2px solid var(--color-accent); border-radius: var(--radius-small); background: var(--color-dialog); color: var(--color-ink); box-shadow: 0 8px 24px var(--color-dialog-shadow); opacity: 0; pointer-events: none; transition: opacity var(--dur-fast), translate var(--dur-fast); }
+#jg-bond-notice.visible { opacity: 1; translate: -50% 0; }
+#jg-bond-notice span { grid-column: 1 / -1; font-size: 12px; color: var(--color-ink-2); }
+#jg-bond-notice strong { font: 500 26px var(--font-display); }
+#jg-bond-notice em { font-size: 14px; font-style: normal; font-weight: 600; color: var(--color-accent); white-space: nowrap; }
 #jg-orientation { display: none; }
 #jg-debug { position: fixed; top: 0; right: 0; z-index: 60; width: 300px; font: 10px/1.5 var(--font-mono); color: var(--color-dialog-text); background: var(--color-chrome-21); padding: 9px 12px; max-height: 60dvh; overflow: auto; }
 #jg-debug summary { cursor: pointer; }

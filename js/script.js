@@ -41,6 +41,14 @@
       xiaoxi 我的笔在教室，等休息再写。
       xiaoying 我有。等下拿给你。
       n 我只记住了她们说的那支笔，还没把名字和脸完全对上。
+      `), C('xiaozhu', 'normal', 'center-left'), ...L(`
+      xiaozhu 你们这边是几班？
+      p 我也刚想问。你叫什么？
+      xiaozhu 小朱。先记住姓就行，名字等会儿点名会喊。
+      p 好，我是……
+      xiaozhu 先站好，教官要看过来了。
+      n 他把帽檐往上抬了一点，回到自己的位置。
+      `), ...L(`
       military_instructor 今天先练站姿和基本动作，不急着比谁做得快。
       military_instructor 觉得不舒服要报告，不要硬撑。听明白了吗？
       p 明白。
@@ -821,6 +829,42 @@
       liaosiyu 嗯。
       n 他继续翻书，没有留我再聊。我拿着笔记回到自己座位，刚好赶上铃声。
       n 十分钟里，我们好像做了很多事，又没有一件值得专门记下来。
+      `), 'jump GiftBreak'
+    ],
+    GiftBreak: [
+      ...S.scene('classroom', 'daily', '第一周 · 课间的小礼物'), C('liaosiyu', 'reading', 'desk-far'), C('xiaozhu', 'normal', 'mid-left'),
+      ...L(`
+      n 下一次课间，小朱抱着一摞本子从门口进来，看见我手里的小纸袋。
+      xiaozhu 你拿着它站半天了，准备给谁？
+      p 给廖思宇。上次借笔记，还没好好谢谢他。
+      xiaozhu 那你过去吧，本子我帮你放讲台上。
+      n 他从我旁边走过去，没替我喊人。我绕过几排桌子，来到窗边。
+      p 教官，等一下。
+      liaosiyu 嗯？
+      n 我把纸袋打开，里面是两样不贵的小东西。我只打算送一样。
+      `), ...question('p 我递给他……', [['Bookmark', '一张书签', 'GiftBookmark'], ['Pen', '一支备用笔', 'GiftPen']])
+    ],
+    GiftBookmark: [...L(`
+      p 这张书签送你。上次借笔记，谢谢。
+      liaosiyu 你专门带的？
+      p 嗯。看到的时候想起你经常看书。
+      liaosiyu 那我收下了。谢谢。
+      n 他把书签夹在刚读的那一页，合上书时又看了一眼页码。
+      `), B(3, 'gift_given', true), ...L(`
+      p 别夹丢了。
+      liaosiyu 不会。我记得放在哪一页。
+      n 小朱已经把本子放好，正从讲台边走回来。我也回到自己的座位，等上课铃响。
+      `), 'jump Act5'],
+    GiftPen: [...L(`
+      p 这支笔送你。上次借笔记，谢谢。
+      liaosiyu 我有笔。
+      p 知道，留着备用。你上次还借给小徐一支。
+      liaosiyu 哦，对。那我收下了，谢谢。
+      n 他试着在草稿纸上划了一笔，才把笔放进笔袋。
+      `), B(2, 'gift_given', true), ...L(`
+      p 能写就行。
+      liaosiyu 嗯，很顺。
+      n 小朱已经把本子放好，正从讲台边走回来。我也回到自己的座位，等上课铃响。
       `), 'jump Act5'
     ],
     Act5: [

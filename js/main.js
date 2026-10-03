@@ -141,6 +141,7 @@
       if (busy) return;
       busy = true;
       playback.stop(); resetCheckpoint();
+      window.JiaoguanUI.hideBondChange();
       try {
         if (engine.global('playing')) await engine.resetGame();
         // A new playthrough starts a fresh journal even after END returned to title.
@@ -223,7 +224,7 @@
       if (!engine.global('playing')) { playback.stop(); resetCheckpoint(); window.JiaoguanUI.refreshTitle(); }
     });
     root.addEventListener('didLoadGame', () => {
-      playback.stop(); resetCheckpoint(); window.JiaoguanUI.refreshRuntime();
+      playback.stop(); resetCheckpoint(); window.JiaoguanUI.hideBondChange(); window.JiaoguanUI.refreshRuntime();
     });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) { playback.stop(); clearTimeout(automaticTimer); saveAutomatic('hidden'); }
