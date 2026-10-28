@@ -144,6 +144,10 @@
       window.JiaoguanUI.hideBondChange();
       try {
         if (engine.global('playing')) await engine.resetGame();
+        // Monogatari 2.8 resets the choice stack, but leaves its static input
+        // blocker set when a player returns to the title during a choice.
+        const choice = engine.action('Choice');
+        if (choice) choice.blocking = false;
         // A new playthrough starts a fresh journal even after END returned to title.
         Object.assign(engine.storage(), { events: {}, choices: [] });
         engine.global('playing', true);
