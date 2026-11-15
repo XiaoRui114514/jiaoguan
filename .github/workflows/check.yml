@@ -1,0 +1,17 @@
+name: Check static game
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  release-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build allowed release files
+        run: node tools/build-release.cjs
+      - name: Check manifest, artwork and private-file exclusions
+        run: node tools/check-release.cjs
