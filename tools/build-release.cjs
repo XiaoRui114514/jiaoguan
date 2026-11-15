@@ -12,7 +12,7 @@ const sandbox = { window: {}, monogatari: {
   assets(type, value) { definitions.assets[type] = value; }
 } };
 vm.runInNewContext(fs.readFileSync(path.join(root, 'js/resources.js'), 'utf8'), sandbox);
-const files = new Set(['index.html', 'tokens.css', 'favicon.ico', 'css/game.css', 'assets/audio/CREDITS.md',
+const files = new Set(['index.html', 'robots.txt', 'sitemap.xml', 'tokens.css', 'favicon.ico', 'css/game.css', 'assets/audio/CREDITS.md',
   ...fs.readdirSync(path.join(root, 'js')).filter(n => n.endsWith('.js')).map(n => 'js/' + n),
   'vendor/monogatari/monogatari.js', 'vendor/monogatari/monogatari.css', 'vendor/monogatari/LICENSE']);
 for (const c of Object.values(definitions.characters)) {
